@@ -1,7 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit'
+import todoLists from 'entities/todoList/model/slice.ts'
 
 export const store = configureStore({
-  reducer: {}
+  reducer: {
+    todoLists
+  }
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

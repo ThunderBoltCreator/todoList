@@ -14,3 +14,4 @@ const todoListsSlice = createSlice({
   }
 })
 
+export default todoListsSlice.reducer
