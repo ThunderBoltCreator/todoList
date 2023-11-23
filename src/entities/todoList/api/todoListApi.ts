@@ -8,9 +8,9 @@ import type {
 
 const baseUrl = 'todo-lists'
 
-const todoListApi = {
-  getAllTodos() {
-    return $axios.get<GetTodoListsResponse>(baseUrl)
+export const todoListApi = {
+  async getAllTodos() {
+      return await $axios.get<GetTodoListsResponse>(baseUrl)
   },
   createTodo(title: string) {
     return $axios.post<PostTodoResponse>(baseUrl, {title})

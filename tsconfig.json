@@ -23,7 +23,8 @@
     "paths": {
       "app/*": ["app/*"],
       "pages": ["pages/*"],
-      "shared": ["shared/*"]
+      "shared": ["shared/*"],
+      "entities": ["entities/*"],
     },
     "importsNotUsedAsValues": "error"
   },
