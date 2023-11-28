@@ -4,13 +4,14 @@ import type {
   GetTodoListsResponse,
   PostTodoResponse,
   UpdateTodoTitleResponse
-} from 'entities/todoList/api/types.ts'
+} from 'entities/todoLists/api/types.ts'
+
 
 const baseUrl = 'todo-lists'
 
 export const todoListApi = {
   async getAllTodos() {
-      return await $axios.get<GetTodoListsResponse>(baseUrl)
+    return await $axios.get<GetTodoListsResponse>(baseUrl)
   },
   createTodo(title: string) {
     return $axios.post<PostTodoResponse>(baseUrl, {title})

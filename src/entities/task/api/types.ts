@@ -1,13 +1,16 @@
 import type {Task} from 'entities/task/model/types.ts'
 
 type Response<D> = {
-  items: D
-  totalCount: number
-  error: string
+  data: D
+  messages: string[]
+  fieldsErrors: string[]
+  resultCode: number
 }
 
-export type GetTasksResponse = {
+export type GetTasksRes = {
   items: Task[],
   totalCount: number,
   error: unknown
 }
+
+export type PostTasks = Response<{ item: Task }>

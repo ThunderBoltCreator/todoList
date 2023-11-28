@@ -1,6 +1,7 @@
-import {baseLayout} from 'app/layouts/baseLayout.tsx'
-import {Home} from 'pages/home/Home.tsx'
 import {createBrowserRouter} from 'react-router-dom'
+import {baseLayout} from 'app/layouts/baseLayout.tsx'
+import {Home} from 'pages/Home.tsx'
+
 
 export function appRouter() {
   return createBrowserRouter([
@@ -11,7 +12,7 @@ export function appRouter() {
       children: [
         {
           path: 'home',
-          element: <Home />
+          element: <Home/>
         }
       ]
     }

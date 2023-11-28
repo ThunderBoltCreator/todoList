@@ -1,21 +1,21 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import type {TasksState} from './types.ts'
 import {tasksApi} from 'entities/task/api/taskApi.ts'
+import type {RootState} from 'app/appStore.ts'
+import {setStatus} from 'entities/session'
 
 const initialState: TasksState = {
-  items: [],
-  error: null,
+  items: {},
   totalCount: 0
 }
 
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks',
   async (todoId: string, thunkAPI) => {
     const {data} = await tasksApi.getAllTasks(todoId)
-
-    return data
+    return {data, todoId, thunkAPI}
   })
-// 086
-const tasksSlice = createSlice({
+
+export const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {},
@@ -25,14 +25,9 @@ const tasksSlice = createSlice({
         console.log('tasks pending')
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
-        const data = action.payload
 
-        state = {
-          items: data.items,
-          error: data.error,
-          totalCount: data.totalCount
-        }
-
+        state.items[action.payload.todoId] = action.payload.data
+        action.payload.thunkAPI.dispatch(setStatus({status: 'successes'}))
         return state
       })
       .addCase(fetchTasks.rejected, () => {
@@ -41,5 +36,6 @@ const tasksSlice = createSlice({
   }
 })
 
-
-export default tasksSlice.reducer
+export const selectTasks = (state: RootState) => state.tasks.items
+export const selectTasksByTodoId = (id: string) => (state: RootState) => state.tasks.items[id]
+export const selectTasksCount = (state: RootState) => state.tasks.totalCount

@@ -1,12 +1,9 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import todoLists from 'entities/todoList/model/todosSlice.ts'
-import tasks from 'entities/task/model/tasksSlice.ts'
+import {configureStore} from '@reduxjs/toolkit'
+import {rootReducer} from 'app/rootReducer.ts'
+
 
 export const store = configureStore({
-  reducer: combineReducers({
-    todoLists,
-    tasks
-  })
+  reducer: rootReducer
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

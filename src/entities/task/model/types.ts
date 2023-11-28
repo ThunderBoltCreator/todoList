@@ -1,7 +1,8 @@
 export interface TasksState {
-  items: Task[]
+  items: {
+    [key: string]: Task[]
+  }
   totalCount: number
-  error: unknown
 }
 
 export type Task = {
@@ -12,7 +13,7 @@ export type Task = {
   order: number
   status: number
   priority: number
-  startDate: unknown
-  deadline: unknown
+  startDate: string
+  deadline: string
   addedDate: string
 }
