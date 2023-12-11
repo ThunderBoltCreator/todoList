@@ -1,36 +1,11 @@
-import {Task} from './Task.tsx'
-import {useAppSelector} from 'shared/lib/ReduxHooks.ts'
-import {selectTasksByTodoId} from 'entities/task/model/tasksSlice.ts'
+import { Task, type TaskModel } from "entities/task"
 
 type TaskListProps = {
   todoId: string
+  tasks: TaskModel[]
 }
 
-export function TaskList({todoId}: TaskListProps) {
-  const tasks = useAppSelector(selectTasksByTodoId(todoId))
-  setTimeout(() => {
-    console.log(tasks)
-  }, 3000)
-
-
-  console.log(tasks)
-
-  const mapTask = tasks.map(task => (
-    <Task
-      task={task}
-    />
-  ))
-  return (
-    <>
-      {
-        tasks ? (
-          <ul>
-            {mapTask}
-          </ul>
-        ) : (
-          <div>test</div>
-        )
-      }
-    </>
-  )
+export function TaskList({ todoId, tasks }: TaskListProps) {
+  const mapTask = tasks?.map((task) => <Task key={task.id} task={task} />)
+  return <>{tasks ? <ul>{mapTask}</ul> : <div>Task list is empty!</div>}</>
 }

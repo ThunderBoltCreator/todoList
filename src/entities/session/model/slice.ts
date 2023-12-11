@@ -1,8 +1,8 @@
-import type {PayloadAction} from '@reduxjs/toolkit'
-import {createSlice} from '@reduxjs/toolkit'
-import type {RootState} from 'app/appStore.ts'
+import type { PayloadAction } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
+import { SessionMatchers } from "./matchers.ts"
 
-export type SessionStatus = 'loading' | 'successes' | 'error'
+export type SessionStatus = "loading" | "idle" | "error"
 
 export type SessionSliceState = {
   status: SessionStatus
@@ -12,28 +12,37 @@ export type SessionSliceState = {
 
 const initialState: SessionSliceState = {
   isAuthorized: false,
-  status: 'loading',
-  error: null
+  status: "idle",
+  error: null,
 }
 
 export const sessionSlice = createSlice({
-  name: 'session',
+  name: "session",
   initialState,
   reducers: {
     setAuth(state, action: PayloadAction<{ isAuthorized: boolean }>) {
       state.isAuthorized = action.payload.isAuthorized
     },
-    setError(state, action: PayloadAction<{ error: never }>) {
-      state.error = action.payload.error
+    setError(state, action: PayloadAction<string | null>) {
+      state.error = action.payload
     },
     setStatus(state, action: PayloadAction<{ status: SessionStatus }>) {
       state.status = action.payload.status
-    }
-  }
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(SessionMatchers.isPendingAction, (state) => {
+        state.status = "loading"
+      })
+      .addMatcher(SessionMatchers.isFulfilledAction, (state) => {
+        state.status = "idle"
+      })
+      .addMatcher(SessionMatchers.isRejectedAction, (state, action) => {
+        state.error = action.error.message
+        state.status = "error"
+      })
+  },
 })
 
-export const selectStatus = (state: RootState) => state.session.status
-export const selectError = (state: RootState) => state.session.error
-export const selectIsAuth = (state: RootState) => state.session.isAuthorized
-
-export const {setAuth, setError, setStatus} = sessionSlice.actions
+export const { setAuth, setError, setStatus } = sessionSlice.actions

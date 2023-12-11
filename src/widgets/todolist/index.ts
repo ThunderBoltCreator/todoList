@@ -1,3 +1,3 @@
-import {TodoList} from './ui/Todolist.tsx'
+import { TodoList } from "./ui/Todolist.tsx"
 
-export {TodoList}
+export { TodoList }

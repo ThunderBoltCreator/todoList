@@ -1,4 +1,4 @@
-import type {TodoList} from 'entities/todoList/model/types.ts'
+import type { TodoList } from "entities/todoLists/model/types.ts"
 
 type Response<D> = {
   fieldsErrors: string[]

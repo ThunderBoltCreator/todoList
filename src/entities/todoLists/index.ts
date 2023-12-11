@@ -1,3 +1,3 @@
-import {fetchTodos, selectTodos, todoListsSlice} from './model/todosSlice.ts'
+import { fetchTodos, selectTodos, todoListsSlice } from "./model/todosSlice.ts"
 
-export {fetchTodos, todoListsSlice, selectTodos}
+export { fetchTodos, todoListsSlice, selectTodos }

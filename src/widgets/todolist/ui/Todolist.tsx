@@ -1,19 +1,23 @@
-import {TaskList} from 'entities/task/ui/TaskList.tsx'
-import type {TodoList} from 'entities/todoLists/model/types.ts'
+import type { TodoListModel } from "entities/todoLists/model/types.ts"
+import { TaskList } from "entities/task/ui/TaskList.tsx"
+import { useAppSelector } from "shared/lib/ReduxHooks.ts"
+import { selectTasksByTodoId } from "entities/task/model/tasksSlice.ts"
 
 type TodolistProps = {
-  data: TodoList
+  data: TodoListModel
 }
 
-export function TodoList({data}: TodolistProps) {
-  // log
+export function TodoList({ data }: TodolistProps) {
+  const tasks = useAppSelector(selectTasksByTodoId(data.id))
 
   return (
-    <div>
-      <h2>{data.title}</h2>
-      <ul>
-        <TaskList todoId={data.id}/>
-      </ul>
+    <div className={"flex-todos bg-todo1 border border-black rounded-md min-h-todos"}>
+      <h2 className={"text-4xl py-8 text-center border-b"}>{data.title}</h2>
+      <div>
+        <ul>
+          <TaskList todoId={data.id} tasks={tasks} />
+        </ul>
+      </div>
     </div>
   )
 }

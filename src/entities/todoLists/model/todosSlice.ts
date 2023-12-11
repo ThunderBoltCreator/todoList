@@ -1,43 +1,72 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import type {TodoList, TodoListsState} from './types.ts'
-import {todoListApi} from 'entities/todoLists/api/todoListApi.ts'
-import {fetchTasks} from 'entities/task/model/tasksSlice.ts'
-import type {RootState} from 'app/appStore.ts'
-import {setStatus} from 'entities/session'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import type { TodoListModel, TodoListsState } from "./types.ts"
+import { todoListApi } from "entities/todoLists/api/todoListApi.ts"
+import type { RootState } from "app/appStore.ts"
+import type { AxiosError } from "axios"
+import { fetchTasks } from "entities/task"
+// import {setStatus} from 'entities/session'
 
 const initialState: TodoListsState = {
-  items: []
+  items: [],
+  activeTab: 1,
 }
 
-export const fetchTodos = createAsyncThunk('todoLists/fetchTodos', async (_, thunkAPI) => {
+export const fetchTodos = createAsyncThunk("todoLists/fetchTodos", async (_, { dispatch, rejectWithValue }) => {
+  try {
+    const response = await todoListApi.getAllTodos()
 
-  thunkAPI.dispatch(setStatus({status: 'loading'}))
+    // console.log('response', response)
+    if (response.data) {
+      response.data.forEach((el: TodoListModel) => {
+        dispatch(fetchTasks(el.id))
+      })
 
-  const data = await todoListApi.getAllTodos()
-
-  data.data.forEach((el: TodoList) => {
-    thunkAPI.dispatch(fetchTasks(el.id))
-  })
-
-  return data.data
-})
-
-export const todoListsSlice = createSlice({
-  name: 'todoLists',
-  initialState,
-  reducers: {},
-  extraReducers: {
-    [fetchTodos.pending]: () => {
-      console.log('pending')
-    },
-    [fetchTodos.fulfilled]: (state, action) => {
-      state.items = action.payload
-    },
-    [fetchTodos.rejected]: () => {
-      console.log('rejected')
+      return response.data
     }
-      
+  } catch (err) {
+    const error: AxiosError<never> = err
+    return rejectWithValue(error.message)
   }
 })
 
+export const todoListsSlice = createSlice({
+  name: "todoLists",
+  initialState,
+  reducers: {
+    setActiveTab(state, action) {
+      state.activeTab = action.payload
+    },
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTodos.pending, () => {
+        console.log("todos pending")
+      })
+      .addCase(fetchTodos.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.items = action.payload
+        }
+        // console.log(action.payload)
+        // console.log('action', action.payload)
+
+        // console.log(action)
+        console.log(action.payload, "todos fulfilled")
+      })
+      .addCase(fetchTodos.rejected, (state, action) => {
+        if (action.payload) {
+          console.log("reject action payload", action.payload)
+        } else {
+          console.log("reject action payload", action.payload)
+          console.log(action.error.message)
+        }
+        // console.log(action.error, "todos rejected");
+      })
+  },
+})
+
+export const { setActiveTab } = todoListsSlice.actions
+
 export const selectTodos = (state: RootState) => state.todoLists.items
+// export const selectTodoById = (id: string) => (state: RootState) => state.todoLists.items.filter(el => el.id === id)
+export const selectActiveTab = (state: RootState) => state.todoLists.activeTab

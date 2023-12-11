@@ -1,8 +1,9 @@
 export type TodoListsState = {
-  items: TodoList[]
+  items: TodoListModel[]
+  activeTab: number
 }
 
-export type TodoList = {
+export type TodoListModel = {
   id: string
   title: string
   order: number

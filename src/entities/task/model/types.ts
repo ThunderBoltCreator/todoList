@@ -1,11 +1,11 @@
 export interface TasksState {
   items: {
-    [key: string]: Task[]
+    [key: string]: TaskModel[]
   }
   totalCount: number
 }
 
-export type Task = {
+export type TaskModel = {
   id: string
   title: string
   description: string

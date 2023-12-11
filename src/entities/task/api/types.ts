@@ -1,4 +1,4 @@
-import type {Task} from 'entities/task/model/types.ts'
+import type { Task } from "entities/task/model/types.ts"
 
 type Response<D> = {
   data: D
@@ -8,8 +8,8 @@ type Response<D> = {
 }
 
 export type GetTasksRes = {
-  items: Task[],
-  totalCount: number,
+  items: Task[]
+  totalCount: number
   error: unknown
 }
 
