@@ -4,18 +4,21 @@
 
 html,
 body {
-    @apply min-h-screen
+  @apply min-h-screen;
 }
 
 #root {
-    @apply min-h-screen bg-gray-500
+  @apply min-h-screen bg-gray-500;
 }
 
 .button {
-    border-radius: 10px;
-    padding: 10px 70px;
-    font-size: 20px;
-    color: white;
-    border: 1px solid white;
-    background-color: #896d37;
+  border-radius: 10px;
+  padding: 10px 70px;
+  font-size: 20px;
+  color: white;
+  border: 1px solid white;
+  background-color: #896d37;
+}
+
+.tab-hover {
 }

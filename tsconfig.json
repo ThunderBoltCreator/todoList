@@ -24,7 +24,7 @@
       "app/*": ["app/*"],
       "pages": ["pages/*"],
       "shared": ["shared/*"],
-      "entities": ["entities/*"],
+      "entities": ["entities/*"]
     },
     "importsNotUsedAsValues": "error"
   },

@@ -1,10 +1,11 @@
 export interface TasksState {
-  items: Task[]
+  items: {
+    [key: string]: TaskModel[]
+  }
   totalCount: number
-  error: unknown
 }
 
-export type Task = {
+export type TaskModel = {
   id: string
   title: string
   description: string
@@ -12,7 +13,7 @@ export type Task = {
   order: number
   status: number
   priority: number
-  startDate: unknown
-  deadline: unknown
+  startDate: string
+  deadline: string
   addedDate: string
 }

@@ -1,45 +1,37 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import type {TasksState} from './types.ts'
-import {tasksApi} from 'entities/task/api/taskApi.ts'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import type { TasksState } from "./types.ts"
+import { tasksApi } from "entities/task/api/taskApi.ts"
 
 const initialState: TasksState = {
-  items: [],
-  error: null,
-  totalCount: 0
+  items: {},
+  totalCount: 0,
 }
 
-export const fetchTasks = createAsyncThunk('tasks/fetchTasks',
-  async (todoId: string, thunkAPI) => {
-    const {data} = await tasksApi.getAllTasks(todoId)
+export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (todoId: string) => {
+  try {
+    const { data } = await tasksApi.getAllTasks(todoId)
+    return { data, todoId }
+  } catch (e) {
+    console.log(e)
+  }
+})
 
-    return data
-  })
-// 086
-const tasksSlice = createSlice({
-  name: 'tasks',
+export const tasksSlice = createSlice({
+  name: "tasks",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasks.pending, () => {
-        console.log('tasks pending')
+        // console.log('tasks pending')
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
-        const data = action.payload
-
-        state = {
-          items: data.items,
-          error: data.error,
-          totalCount: data.totalCount
-        }
-
-        return state
+        state.items[action.payload.todoId] = action.payload.data.items
+        // console.log(action.payload.data)
+        // console.log('tasks fulfilled')
       })
       .addCase(fetchTasks.rejected, () => {
-        console.log('tasks rejected')
+        // console.log('tasks rejected')
       })
-  }
+  },
 })
-
-
-export default tasksSlice.reducer
