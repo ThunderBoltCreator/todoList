@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import type { TodoListModel, TodoListsState } from "./types.ts"
 import { todoListApi } from "entities/todoLists/api/todoListApi.ts"
-import type { RootState } from "app/appStore.ts"
 import type { AxiosError } from "axios"
 import { fetchTasks } from "entities/task"
 // import {setStatus} from 'entities/session'
@@ -66,7 +65,3 @@ export const todoListsSlice = createSlice({
 })
 
 export const { setActiveTab } = todoListsSlice.actions
-
-export const selectTodos = (state: RootState) => state.todoLists.items
-// export const selectTodoById = (id: string) => (state: RootState) => state.todoLists.items.filter(el => el.id === id)
-export const selectActiveTab = (state: RootState) => state.todoLists.activeTab

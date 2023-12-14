@@ -1,6 +1,6 @@
 export interface TasksState {
   items: {
-    [key: string]: TaskModel[]
+    [todoId: string]: TaskModel[]
   }
   totalCount: number
 }

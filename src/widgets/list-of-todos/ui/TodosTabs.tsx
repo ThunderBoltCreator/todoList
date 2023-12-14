@@ -1,16 +1,16 @@
 import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
-import { selectTodos } from "entities/todoLists"
 import { TabsListItem } from "widgets/list-of-todos/ui/TabsListItem.tsx"
 import { useState } from "react"
-import { selectActiveTab, setActiveTab } from "entities/todoLists/model/todosSlice.ts"
+import { setActiveTab } from "entities/todoLists/model/todosSlice.ts"
 import { Link } from "react-router-dom"
+import { TodosSelectors } from "entities/todoLists"
 
 type TabsCondition = "collapsed" | "expanded"
 
 export function TodosTabs() {
   const dispatch = useAppDispatch()
-  const todos = useAppSelector(selectTodos)
-  const activeTab = useAppSelector(selectActiveTab)
+  const todos = useAppSelector(TodosSelectors.todos)
+  const activeTab = useAppSelector(TodosSelectors.activeTab)
   const [condition, setCondition] = useState<TabsCondition>("expanded")
 
   const styles: Record<TabsCondition, string> = {

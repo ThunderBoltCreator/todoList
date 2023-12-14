@@ -1,25 +1,34 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import type { TasksState } from "./types.ts"
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import type { AxiosError } from "axios"
 import { tasksApi } from "entities/task/api/taskApi.ts"
+import type { TasksState } from "./types.ts"
 
 const initialState: TasksState = {
   items: {},
   totalCount: 0,
 }
 
-export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (todoId: string) => {
+export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (todoId: string, { rejectWithValue }) => {
   try {
     const { data } = await tasksApi.getAllTasks(todoId)
     return { data, todoId }
   } catch (e) {
-    console.log(e)
+    //@ts-ignore
+    const error: AxiosError = e
+    return rejectWithValue(error.message)
   }
 })
 
 export const tasksSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    changeStatus(state, action: PayloadAction<{ status: 1 | 0; todoId: string; taskId: string }>) {
+      const task = state.items[action.payload.todoId].find((el) => el.id === action.payload.taskId)
+      if (!task) return
+      task.status = action.payload.status
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasks.pending, () => {
@@ -35,3 +44,5 @@ export const tasksSlice = createSlice({
       })
   },
 })
+
+export const TasksActions = tasksSlice.actions
