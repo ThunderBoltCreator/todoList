@@ -14,8 +14,8 @@ export function TodosTabs() {
   const [condition, setCondition] = useState<TabsCondition>("expanded")
 
   const styles: Record<TabsCondition, string> = {
-    collapsed: "fixed p-3 gap-2 rounded-br-xl translate-x-[-75%] transition-transform",
-    expanded: "fixed p-3 gap-2 rounded-br-xl translate-x-0 transition-transform",
+    collapsed: "absolute p-3 gap-2 rounded-br-xl translate-x-[-75%] transition-transform",
+    expanded: "absolute p-3 gap-2 rounded-br-xl translate-x-0 transition-transform",
   }
 
   const renderTodos = todos.map((el, index) => (

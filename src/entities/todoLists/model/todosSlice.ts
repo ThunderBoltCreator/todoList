@@ -7,7 +7,7 @@ import { fetchTasks } from "entities/task"
 
 const initialState: TodoListsState = {
   items: [],
-  activeTab: 1,
+  activeTab: null,
 }
 
 export const fetchTodos = createAsyncThunk("todoLists/fetchTodos", async (_, { dispatch, rejectWithValue }) => {
@@ -15,6 +15,7 @@ export const fetchTodos = createAsyncThunk("todoLists/fetchTodos", async (_, { d
     const response = await todoListApi.getAllTodos()
 
     // console.log('response', response)
+
     if (response.data) {
       response.data.forEach((el: TodoListModel) => {
         dispatch(fetchTasks(el.id))
@@ -27,7 +28,19 @@ export const fetchTodos = createAsyncThunk("todoLists/fetchTodos", async (_, { d
     return rejectWithValue(error.message)
   }
 })
-
+export const deleteTodo = createAsyncThunk(
+  "todoLists/deleteTodo",
+  async (id: string, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await todoListApi.deleteTodo(id)
+      dispatch(fetchTodos())
+      return res.data
+    } catch (e) {
+      const error: AxiosError = e
+      rejectWithValue(error.message)
+    }
+  },
+)
 export const todoListsSlice = createSlice({
   name: "todoLists",
   initialState,

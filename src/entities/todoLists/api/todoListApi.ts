@@ -5,23 +5,30 @@ import type {
   PostTodoResponse,
   UpdateTodoTitleResponse,
 } from "entities/todoLists/api/types.ts"
+import type { AxiosResponse } from "axios"
 
 // const baseUrl = "todo-lists" + "csdgs";
 const baseUrl = "todo-lists"
 
-export const todoListApi = {
+interface TodolistApi {
+  getAllTodos: () => Promise<AxiosResponse<GetTodoListsResponse>>
+  createTodo: (title: string) => Promise<AxiosResponse<PostTodoResponse>>
+  updateTodoTitle: (todoId: string, title: string) => Promise<AxiosResponse<UpdateTodoTitleResponse>>
+  deleteTodo: (todoId: string) => Promise<AxiosResponse<DeleteTodoResponse>>
+}
+export const todoListApi: TodolistApi = {
   getAllTodos() {
-    return $axios.get<GetTodoListsResponse>(baseUrl)
+    return $axios.get(baseUrl)
   },
-  createTodo(title: string) {
-    return $axios.post<PostTodoResponse>(baseUrl, { title })
+  createTodo(title) {
+    return $axios.post(baseUrl, { title })
   },
-  updateTodoTitle(todoId: string, title: string) {
-    return $axios.put<UpdateTodoTitleResponse>(`${baseUrl}/${todoId}`, {
+  updateTodoTitle(todoId, title) {
+    return $axios.put(`${baseUrl}/${todoId}`, {
       title,
     })
   },
-  deleteTodo(todoId: string) {
-    return $axios.delete<DeleteTodoResponse>(`${baseUrl}/${todoId}`)
+  deleteTodo(todoId) {
+    return $axios.delete(`${baseUrl}/${todoId}`)
   },
 }

@@ -1,6 +1,6 @@
 export type TodoListsState = {
   items: TodoListModel[]
-  activeTab: number
+  activeTab: number | null
 }
 
 export type TodoListModel = {

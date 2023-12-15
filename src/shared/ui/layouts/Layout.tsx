@@ -1,26 +1,27 @@
 import cn from "classnames"
-import { SessionSelectors } from "entities/session"
 import { fetchTodos } from "entities/todoLists"
 import { useEffect } from "react"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
+import { useAppDispatch } from "shared/lib/ReduxHooks.ts"
 import { Alert } from "shared/ui/Alert.tsx"
 import { Loader } from "shared/ui/Loader.tsx"
 import { TodosTabs } from "widgets/list-of-todos/ui/TodosTabs.tsx"
 import css from "./layout.module.scss"
+import { Header } from "shared/ui/layouts/Header.tsx"
+import { useSession } from "entities/session/model/selectors.ts"
 
 export function Layout() {
   const loc = useLocation()
-  const nav = useNavigate()
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const { status, isAuth, error } = useSession()
 
-  const status = useAppSelector(SessionSelectors.status)
-  const error = useAppSelector(SessionSelectors.error)
-
+  const tab = loc.pathname !== "/home"
   useEffect(() => {
     dispatch(fetchTodos())
+
     if (loc.pathname === "/") {
-      nav("/home")
+      navigate("/home")
     }
   }, [])
   const popupAlertStyles = cn("absolute w-full h-full flex items-center bg-opacity-bg justify-center")
@@ -35,15 +36,12 @@ export function Layout() {
 
   return (
     <div className={css.root}>
-      <TodosTabs />
+      <Header />
+      {tab && isAuth && <TodosTabs />}
       <main className={"flex items-center justify-center h-full"}>
         <Outlet />
       </main>
-      {/* {status === "loading" && (
-        <div className={popupAlertStyles}>
-          <Loader />
-        </div>
-      )} */}
+
       {error && <Alert type={"error"} message={error} />}
     </div>
   )
