@@ -1,22 +1,28 @@
 import { FcAbout } from "react-icons/fc"
 import { Link } from "react-router-dom"
-import { useSession } from "entities/session/model/selectors.ts"
+import { useSession } from "entities/session/model/sessionSelectors.ts"
+import { useAppDispatch } from "shared/lib/ReduxHooks.ts"
+import { logOut } from "entities/user"
 
 export function Header() {
   const { isAuth } = useSession()
+
+  const dispatch = useAppDispatch()
+
   return (
     <header className={"flex items-center justify-between text-lg p-2"}>
-      <Link to={"/home"}>
-        <FcAbout className={"cursor-pointer text-4xl"} />
-      </Link>
+      <div className={"flex gap-1"}>
+        <Link to={"/home"}>
+          <FcAbout className={"cursor-pointer text-4xl"} />
+        </Link>
+        <Link to={"/new-todo"}>New Todo</Link>
+      </div>
       {isAuth ? (
-        <Link to={"/sign-in"}>Logout</Link>
+        <Link onClick={() => dispatch(logOut())} to={"/auth/sign-in"}>
+          Logout
+        </Link>
       ) : (
-        <div>
-          <Link to={"/auth/sign-in"}>SignIn</Link>
-          <span> / </span>
-          <Link to={"/auth/sign-up"}>SignUp</Link>
-        </div>
+        <Link to={"/auth/sign-in"}>SignIn</Link>
       )}
     </header>
   )

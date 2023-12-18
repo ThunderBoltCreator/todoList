@@ -1,4 +1,4 @@
-import { sessionSlice, setAuth, setError, setStatus } from "./model/slice.ts"
-import { SessionSelectors } from "./model/selectors.ts"
+import { sessionSlice, setError } from "entities/session/model/sessionSlice.ts"
+import { SessionSelectors } from "entities/session/model/sessionSelectors.ts"
 
-export { setStatus, setAuth, setError, sessionSlice, SessionSelectors }
+export { sessionSlice, SessionSelectors, setError }

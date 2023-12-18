@@ -2,21 +2,27 @@ import { createBrowserRouter, Navigate } from "react-router-dom"
 import { Home } from "pages/home/Home.tsx"
 import { baseLayout } from "app/layouts/baseLayout.tsx"
 import { SingleTodoList } from "pages/single-todolist/SingleTodoList.tsx"
-import { SignUp } from "pages/sign-up"
 import { SignIn } from "pages/sign-in"
 import type { ReactElement } from "react"
 import { SessionSelectors } from "entities/session"
 import { useAppSelector } from "shared/lib/ReduxHooks.ts"
+import { CreateTodo } from "pages/new-todo/CreateTodo.tsx"
 
 function AuthGuard({ children }: { children: ReactElement }) {
   const isAuth = useAppSelector(SessionSelectors.isAuth)
 
-  console.log("rabotaet")
-  console.log(isAuth)
   if (!isAuth) return <Navigate to={"/auth/sign-in"} />
 
   return children
 }
+function RedirectToHome({ children }: { children: ReactElement }) {
+  const isAuth = useAppSelector(SessionSelectors.isAuth)
+
+  if (isAuth) return <Navigate to={"/home"} />
+
+  return children
+}
+
 export function appRouter() {
   return createBrowserRouter([
     {
@@ -37,6 +43,20 @@ export function appRouter() {
           ),
         },
         {
+          path: "new-todo",
+          element: (
+            <AuthGuard>
+              <CreateTodo />
+            </AuthGuard>
+          ),
+          children: [
+            {
+              path: "step1",
+              element: <div>Step 1</div>,
+            },
+          ],
+        },
+        {
           path: "todolist/:id",
           element: (
             <AuthGuard>
@@ -53,12 +73,12 @@ export function appRouter() {
           ),
         },
         {
-          path: "auth/sign-up",
-          element: <SignUp />,
-        },
-        {
           path: "auth/sign-in",
-          element: <SignIn />,
+          element: (
+            <RedirectToHome>
+              <SignIn />
+            </RedirectToHome>
+          ),
         },
       ],
     },

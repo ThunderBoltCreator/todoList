@@ -1,10 +1,9 @@
-import { useForm } from "react-hook-form"
-import { AuthForm } from "features/authForm/ui/AuthForm.tsx"
+import { AuthForm } from "features/authentication/authForm"
 
 export function SignIn() {
-  const {} = useForm<{ email: string; password: string }>({
-    mode: "onBlur",
-  })
+  // const { register, handleSubmit } = useForm<{ email: string; password: string }>({
+  //   mode: "onBlur",
+  // })
 
   return (
     <div>

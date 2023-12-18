@@ -11,6 +11,9 @@ export const SessionSelectors = {
   isAuth(state: RootState) {
     return state.session.isAuthorized
   },
+  // isAuth(state: RootState) {
+  //   return state.session.user.isAuthorized
+  // },
 }
 
 export const useSession = () => {
