@@ -22,16 +22,10 @@ export function Layout() {
     dispatch(authMe())
 
     if (loc.pathname === "/") {
-      navigate("/home")
+      navigate("home")
     }
   }, [])
   const popupAlertStyles = cn("absolute w-full h-full flex items-center bg-opacity-bg justify-center")
-
-  // if (status === 'loading') {
-  //   return <div className={popupAlertStyles}>
-  //     <Loader />
-  //   </div>
-  // }
 
   return (
     <div className={css.root}>

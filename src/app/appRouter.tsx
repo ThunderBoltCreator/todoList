@@ -7,6 +7,9 @@ import type { ReactElement } from "react"
 import { SessionSelectors } from "entities/session"
 import { useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { CreateTodo } from "pages/new-todo/CreateTodo.tsx"
+import { CreateTodoForm } from "pages/new-todo/CreateTodoForm.tsx"
+import { AddTasksForm } from "pages/new-todo/AddTasksForm.tsx"
+import { TodoPreview } from "pages/new-todo/TodoPreview.tsx"
 
 function AuthGuard({ children }: { children: ReactElement }) {
   const isAuth = useAppSelector(SessionSelectors.isAuth)
@@ -51,8 +54,16 @@ export function appRouter() {
           ),
           children: [
             {
-              path: "step1",
-              element: <div>Step 1</div>,
+              path: "title",
+              element: <CreateTodoForm />,
+            },
+            {
+              path: "tasks",
+              element: <AddTasksForm />,
+            },
+            {
+              path: "preview",
+              element: <TodoPreview />,
             },
           ],
         },

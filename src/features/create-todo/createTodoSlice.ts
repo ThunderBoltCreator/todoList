@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import type { RootState } from "app/appStore.ts"
 
 type createTodosState = {
   todoTitle: string | null
@@ -20,5 +21,14 @@ export const createTodoSlice = createSlice({
     setTodoTitle(state, action: PayloadAction<{ title: string }>) {
       state.todoTitle = action.payload.title
     },
+    setTasks(state, action: PayloadAction<{ taskTitle: string; initialValue: boolean }[]>) {
+      state.tasks = action.payload
+    },
   },
 })
+
+const todo = (state: RootState) => state.createTodo
+const todoTitle = (state: RootState) => state.createTodo.todoTitle
+const tasks = (state: RootState) => state.createTodo.tasks
+export const CreateTodoSelectors = { todo, todoTitle, tasks }
+export const CreateTodoActions = createTodoSlice.actions

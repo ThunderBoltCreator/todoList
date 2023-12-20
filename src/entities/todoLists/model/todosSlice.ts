@@ -14,8 +14,6 @@ export const fetchTodos = createAsyncThunk("todoLists/fetchTodos", async (_, { d
   try {
     const response = await todoListApi.getAllTodos()
 
-    // console.log('response', response)
-
     if (response.data) {
       response.data.forEach((el: TodoListModel) => {
         dispatch(fetchTasks(el.id))
@@ -51,29 +49,11 @@ export const todoListsSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchTodos.pending, () => {
-        console.log("todos pending")
-      })
-      .addCase(fetchTodos.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.items = action.payload
-        }
-        // console.log(action.payload)
-        // console.log('action', action.payload)
-
-        // console.log(action)
-        console.log(action.payload, "todos fulfilled")
-      })
-      .addCase(fetchTodos.rejected, (state, action) => {
-        if (action.payload) {
-          console.log("reject action payload", action.payload)
-        } else {
-          console.log("reject action payload", action.payload)
-          console.log(action.error.message)
-        }
-        // console.log(action.error, "todos rejected");
-      })
+    builder.addCase(fetchTodos.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.items = action.payload
+      }
+    })
   },
 })
 
