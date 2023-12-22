@@ -30,7 +30,10 @@ export function Layout() {
   return (
     <div className={css.root}>
       <Header />
-      <main className={"flex items-center justify-center h-full"}>
+      {/*<main className={"flex items-center justify-center h-full"}>*/}
+      {/*  <Outlet />*/}
+      {/*</main>*/}
+      <main className={"flex justify-center h-full"}>
         <Outlet />
       </main>
       {tab && isAuth && <TodosTabs />}

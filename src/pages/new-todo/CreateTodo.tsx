@@ -7,7 +7,7 @@ export function CreateTodo() {
 
   useEffect(() => {
     if (loc.pathname === "/new-todo") {
-      navigate("title")
+      navigate("/new-todo/title")
     }
   })
 

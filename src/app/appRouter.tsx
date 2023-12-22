@@ -8,7 +8,7 @@ import { SessionSelectors } from "entities/session"
 import { useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { CreateTodo } from "pages/new-todo/CreateTodo.tsx"
 import { CreateTodoForm } from "pages/new-todo/CreateTodoForm.tsx"
-import { AddTasksForm } from "pages/new-todo/AddTasksForm.tsx"
+import { AddTasks } from "pages/new-todo/AddTasks.tsx"
 import { TodoPreview } from "pages/new-todo/TodoPreview.tsx"
 
 function AuthGuard({ children }: { children: ReactElement }) {
@@ -59,7 +59,7 @@ export function appRouter() {
             },
             {
               path: "tasks",
-              element: <AddTasksForm />,
+              element: <AddTasks />,
             },
             {
               path: "preview",

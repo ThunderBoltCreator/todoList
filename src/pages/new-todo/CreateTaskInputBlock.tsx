@@ -1,26 +1,36 @@
-import { Control, Controller } from "react-hook-form"
-import type { FormState } from "./AddTasksForm.tsx"
+import { Control, Controller, UseFieldArrayRemove } from "react-hook-form"
+import type { FormState } from "pages/new-todo/AddTasks.tsx"
+import cn from "classnames"
+import { FaTrash } from "react-icons/fa"
 
 type Props = {
   control: Control<FormState>
-  value?: any
+  className?: string
   index: number
+  value?: boolean
+  remove: UseFieldArrayRemove
 }
-export function CreateTaskInputBlock({ control, index }: Props) {
+export function CreateTaskInputBlock({ remove, control, value = false, index, className }: Props) {
   return (
-    <div className={"flex gap-2"}>
+    <div className={cn("flex items-center gap-2", className)}>
+      <FaTrash className={"cursor-pointer"} onClick={() => remove(index)} />
       <Controller
         name={`blocks.${index}.taskTitle`}
         control={control}
-        defaultValue=""
         render={({ field }) => <input {...field} placeholder={"Enter Task Title"} />}
       />
       <Controller
-        name={`blocks.${index}.initialValue`}
+        name={`blocks.${index}.completed`}
         control={control}
-        defaultValue={true}
-        //@ts-ignore
-        render={({ field }) => <input type={"checkbox"} {...field} />}
+        render={({ field }) => {
+          console.log(field)
+          return (
+            <>
+              <input type={"radio"} {...field} value="true" defaultChecked={field.value === true} /> Yes
+              <input type={"radio"} {...field} value="false" defaultChecked={field.value === false} /> No
+            </>
+          )
+        }}
       />
     </div>
   )
