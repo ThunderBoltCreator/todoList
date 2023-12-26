@@ -1,5 +1,5 @@
-import { useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { TodosSelectors } from "entities/todoLists"
+import { useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { TodoList } from "widgets/todolist"
 
 export function ListOfTodoLists() {

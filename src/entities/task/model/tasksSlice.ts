@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import type { RootState } from "app/appStore.ts"
 import type { AxiosError } from "axios"
 import { tasksApi } from "entities/task/api/taskApi.ts"
 import type { TasksState } from "./types.ts"
@@ -18,6 +19,17 @@ export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (todoId: st
     return rejectWithValue(error.message)
   }
 })
+export const addTasks = createAsyncThunk<void, void, { state: RootState }>(
+  "tasks/addTasks",
+  async (arg, { getState }) => {
+    try {
+      const state = getState().createTodo.tasks
+      const res = await tasksApi.addTask()
+    } catch (e) {
+      console.log(e)
+    }
+  },
+)
 
 export const tasksSlice = createSlice({
   name: "tasks",

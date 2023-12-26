@@ -1,4 +1,4 @@
-import type { TodoList } from "entities/todoLists/model/types.ts"
+import type { TodoListModel } from "entities/todoLists/model/types.ts"
 
 type Response<D> = {
   fieldsErrors: string[]
@@ -7,8 +7,8 @@ type Response<D> = {
   data: D
 }
 
-export type GetTodoListsResponse = TodoList[]
-export type PostTodoResponse = Response<{ item: TodoList }>
+export type GetTodoListsResponse = TodoListModel[]
+export type PostTodoResponse = Response<{ item: TodoListModel }>
 
 export type DeleteTodoResponse = Response<Record<string, unknown>>
 export type UpdateTodoTitleResponse = Response<Record<string, unknown>>

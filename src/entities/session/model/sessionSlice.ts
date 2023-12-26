@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { SessionMatchers } from "entities/session/model/sessionMatchers.ts"
-import { authMe, logOut, signIn } from "entities/user/model/userSlice.ts"
 import type { SessionSliceState } from "entities/session/model/types.ts"
+import { authMe, logOut, signIn } from "entities/user/model/userSlice.ts"
 
 // const initialState: SessionSliceState = {
 //   status: "idle",
@@ -15,6 +15,7 @@ import type { SessionSliceState } from "entities/session/model/types.ts"
 
 const initialState: SessionSliceState = {
   status: "idle",
+  bigStatus: "loading",
   error: null,
   isAuthorized: false,
 }

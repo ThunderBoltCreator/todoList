@@ -1,4 +1,4 @@
-import type { Task } from "entities/task/model/types.ts"
+import type { TaskModel } from "entities/task/model/types.ts"
 
 type Response<D> = {
   data: D
@@ -8,9 +8,11 @@ type Response<D> = {
 }
 
 export type GetTasksRes = {
-  items: Task[]
+  items: TaskModel[]
   totalCount: number
   error: unknown
 }
 
-export type PostTasks = Response<{ item: Task }>
+export type PostTaskRes = Omit<Response<{ item: TaskModel }>, "fieldsErrors">
+
+export type PostTasks = Response<{ item: TaskModel }>

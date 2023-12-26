@@ -48,7 +48,7 @@ export function CreateTodoForm() {
     //     </div>
     //   </form>
     // </div>
-    <CreateTodoBaseForm title={"Create Todo"} onSubmit={handleSubmit(onSubmitHandler)}>
+    <CreateTodoBaseForm className={"h-full"} title={"Create Todo"} onSubmit={handleSubmit(onSubmitHandler)}>
       <>
         <label className={"flex flex-col"}>
           <h3 className={"text-2xl"}>Enter Todo Title</h3>

@@ -1,5 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { rootReducer } from "app/rootReducer.ts"
+import { sessionSlice } from "entities/session"
+import { userSlice } from "entities/user"
+import { tasksSlice } from "entities/task"
+import { todoListsSlice } from "entities/todoLists"
+import { createTodoSlice } from "features/create-todo/createTodoSlice.ts"
+
+const rootReducer = {
+  session: sessionSlice.reducer,
+  user: userSlice.reducer,
+  tasks: tasksSlice.reducer,
+  todoLists: todoListsSlice.reducer,
+  createTodo: createTodoSlice.reducer,
+}
 
 export const store = configureStore({
   reducer: rootReducer,

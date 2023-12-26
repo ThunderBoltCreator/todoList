@@ -1,10 +1,13 @@
 import { $axios } from "shared/api/axiosInstance.ts"
-import type { GetTasksRes } from "entities/task/api/types.ts"
+import type { GetTasksRes, PostTaskRes } from "entities/task/api/types.ts"
 
 const baseUrl = "todo-lists"
 
 export const tasksApi = {
-  async getAllTasks(todoId: string) {
-    return await $axios.get<GetTasksRes>(`${baseUrl}/${todoId}/tasks`)
+  getAllTasks(todoId: string) {
+    return $axios.get<GetTasksRes>(`${baseUrl}/${todoId}/tasks`)
+  },
+  addTask(todoId: string, title: string) {
+    return $axios.post<PostTaskRes>(`${baseUrl}/${todoId}/tasks`, title)
   },
 }

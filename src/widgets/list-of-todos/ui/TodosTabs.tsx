@@ -1,18 +1,21 @@
+import cn from "classnames"
+import { TodosSelectors } from "entities/todoLists"
+import { setActiveTab } from "entities/todoLists/model/todosSlice.ts"
+import { useState } from "react"
+import { Link, useLocation } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { TabsListItem } from "widgets/list-of-todos/ui/TabsListItem.tsx"
-import { useState } from "react"
-import { setActiveTab } from "entities/todoLists/model/todosSlice.ts"
-import { Link } from "react-router-dom"
-import { TodosSelectors } from "entities/todoLists"
 
 type TabsCondition = "collapsed" | "expanded"
 
 export function TodosTabs() {
   const dispatch = useAppDispatch()
+  const location = useLocation()
   const todos = useAppSelector(TodosSelectors.todos)
   const activeTab = useAppSelector(TodosSelectors.activeTab)
   const [condition, setCondition] = useState<TabsCondition>("expanded")
 
+  // if (location.pathname === "/home")
   const styles: Record<TabsCondition, string> = {
     collapsed: "absolute p-3 gap-2 rounded-br-xl translate-x-[-75%] transition-transform",
     expanded: "absolute p-3 gap-2 rounded-br-xl translate-x-0 transition-transform",
@@ -38,7 +41,7 @@ export function TodosTabs() {
   }
 
   return (
-    <div className={styles[condition]}>
+    <div className={cn("top-[70px] left-0", styles[condition])}>
       <ul className={"flex flex-col gap-2"}>
         <li>
           <Link to={"/all-todos"}>All Todos</Link>
