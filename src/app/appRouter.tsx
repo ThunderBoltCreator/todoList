@@ -1,5 +1,6 @@
 import { baseLayout } from "app/layouts/baseLayout.tsx"
 import { SessionSelectors } from "entities/session"
+import { AllTodos } from "pages/all-todos/AllTodos"
 import { Home } from "pages/home/Home.tsx"
 import { AddTasks } from "pages/new-todo/AddTasks.tsx"
 import { CreateTodo } from "pages/new-todo/CreateTodo.tsx"
@@ -7,8 +8,8 @@ import { CreateTodoForm } from "pages/new-todo/CreateTodoForm.tsx"
 import { TodoPreview } from "pages/new-todo/TodoPreview.tsx"
 import { SignIn } from "pages/sign-in"
 import { SingleTodoList } from "pages/single-todolist/SingleTodoList.tsx"
-import { type ReactElement } from "react"
-import { createBrowserRouter, Navigate } from "react-router-dom"
+import type { ReactElement } from "react"
+import { Navigate, createBrowserRouter } from "react-router-dom"
 import { useAppSelector } from "shared/lib/ReduxHooks.ts"
 
 function AuthGuard({ children }: { children: ReactElement }) {
@@ -39,11 +40,7 @@ export function appRouter() {
       children: [
         {
           path: "home",
-          element: (
-            <AuthGuard>
-              <Home />
-            </AuthGuard>
-          ),
+          element: <Home />,
         },
         {
           path: "new-todo",
@@ -66,6 +63,14 @@ export function appRouter() {
               element: <TodoPreview />,
             },
           ],
+        },
+        {
+          path: "todos",
+          element: (
+            <AuthGuard>
+              <AllTodos />
+            </AuthGuard>
+          ),
         },
         {
           path: "todolist/:id",

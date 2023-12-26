@@ -10,7 +10,7 @@ type Props = {
   value?: boolean
   remove: UseFieldArrayRemove
 }
-export function CreateTaskInputBlock({ remove, control, value = false, index, className }: Props) {
+export function CreateTaskInputBlock({ remove, control, index, className }: Props) {
   return (
     <div className={cn("flex items-center gap-2", className)}>
       <FaTrash className={"cursor-pointer"} onClick={() => remove(index)} />

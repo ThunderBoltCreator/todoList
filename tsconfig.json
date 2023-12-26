@@ -22,9 +22,11 @@
     "baseUrl": "./src/",
     "paths": {
       "app/*": ["app/*"],
-      "pages": ["pages/*"],
-      "shared": ["shared/*"],
-      "entities": ["entities/*"]
+      "pages/*": ["pages/*"],
+      "shared/*": ["shared/*"],
+      "entities/*": ["entities/*"],
+      "features/*": ["features/*"],
+      "widgets/*": ["widgets/*"]
     },
     "verbatimModuleSyntax": true
   },

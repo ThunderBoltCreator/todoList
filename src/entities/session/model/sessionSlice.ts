@@ -15,6 +15,7 @@ import { authMe, logOut, signIn } from "entities/user/model/userSlice.ts"
 
 const initialState: SessionSliceState = {
   status: "idle",
+  bigStatus: "loading",
   error: null,
   isAuthorized: false,
 }

@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { useFieldArray, useForm } from "react-hook-form"
 import { CreateTaskInputBlock } from "./CreateTaskInputBlock.tsx"
-import { CreateTodoSelectors } from "features/create-todo/createTodoSlice.ts"
+import { CreateTodoActions, CreateTodoSelectors } from "features/create-todo/createTodoSlice.ts"
 import { useNavigate } from "react-router-dom"
 import { CreateTodoBaseForm } from "features/create-todo/ui/CreateTodoBaseForm.tsx"
 import { Button } from "shared/ui/common/Button.tsx"
@@ -30,7 +30,7 @@ export function AddTasks() {
   const onSubmitHandler = (data: FormState) => {
     console.log(data)
     console.log("submit")
-    // dispatch(CreateTodoActions.setTasks(data.blocks))
+    dispatch(CreateTodoActions.setTasks(data.blocks))
     navigate("/new-todo/preview")
   }
   const onAddTaskHandler = () => {

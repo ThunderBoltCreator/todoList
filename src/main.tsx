@@ -2,9 +2,11 @@ import { appRouter } from "app/appRouter.tsx"
 import { store } from "app/appStore.ts"
 import React from "react"
 import ReactDOM from "react-dom/client"
-import "./index.css"
 import { Provider } from "react-redux"
 import { RouterProvider } from "react-router-dom"
+import "./index.css"
+
+// TODO create home page with two buttons(create todo and show todos)
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -13,9 +15,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </Provider>
   </React.StrictMode>,
 )
-
-//todo delete tasks
-//todo filter tasks
-//todo add task
-//todo add todoList
-//todo delete todoList

@@ -36,6 +36,9 @@ export default {
       transitionProperty: {
         w: "width",
       },
+      backgroundColor: {
+        loader: "rgba(255,255,255, 0.9)",
+      },
     },
   },
   plugins: [
