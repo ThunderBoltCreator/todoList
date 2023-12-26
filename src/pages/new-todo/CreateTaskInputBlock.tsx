@@ -1,6 +1,6 @@
-import { Control, Controller, UseFieldArrayRemove } from "react-hook-form"
-import type { FormState } from "pages/new-todo/AddTasks.tsx"
 import cn from "classnames"
+import type { FormState } from "pages/new-todo/AddTasks.tsx"
+import { Controller, type Control, type UseFieldArrayRemove } from "react-hook-form"
 import { FaTrash } from "react-icons/fa"
 
 type Props = {

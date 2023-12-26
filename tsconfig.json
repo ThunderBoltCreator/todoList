@@ -26,7 +26,7 @@
       "shared": ["shared/*"],
       "entities": ["entities/*"]
     },
-    "importsNotUsedAsValues": "error"
+    "verbatimModuleSyntax": true
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

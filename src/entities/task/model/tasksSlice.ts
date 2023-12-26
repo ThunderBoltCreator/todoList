@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { AxiosError } from "axios"
 import { tasksApi } from "entities/task/api/taskApi.ts"
 import type { TasksState } from "./types.ts"

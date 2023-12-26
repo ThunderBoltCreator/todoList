@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { SessionMatchers } from "entities/session/model/sessionMatchers.ts"
-import { authMe, logOut, signIn } from "entities/user/model/userSlice.ts"
 import type { SessionSliceState } from "entities/session/model/types.ts"
+import { authMe, logOut, signIn } from "entities/user/model/userSlice.ts"
 
 // const initialState: SessionSliceState = {
 //   status: "idle",
