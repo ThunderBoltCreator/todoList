@@ -4,7 +4,6 @@ import { tasksSlice } from "entities/task"
 import { todoListsSlice } from "entities/todoLists"
 import { userSlice } from "entities/user"
 import { createTodoSlice } from "features/create-todo"
-import { hubSlice } from "pages/hub"
 
 const rootReducer = {
   hub: hubSlice.reducer,

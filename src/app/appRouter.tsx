@@ -2,31 +2,27 @@ import { baseLayout } from "app/layouts/baseLayout.tsx"
 import { SessionSelectors } from "entities/session"
 import { AllTodos } from "pages/all-todos/AllTodos"
 import { Home } from "pages/home/Home"
+import { Hub } from "pages/hub/Hub"
 import { AddTasks } from "pages/new-todo/AddTasks.tsx"
 import { CreateTodo } from "pages/new-todo/CreateTodo.tsx"
 import { CreateTodoForm } from "pages/new-todo/CreateTodoForm.tsx"
 import { TodoPreview } from "pages/new-todo/TodoPreview.tsx"
 import { SignIn } from "pages/sign-in"
 import { SingleTodoList } from "pages/single-todolist/SingleTodoList.tsx"
-import type { ReactElement } from "react"
+import type { ReactNode } from "react"
 import { Navigate, createBrowserRouter } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
+import { useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { layoutWithTabs } from "./layouts/layoutWithTabs"
 import { setReason } from "pages/hub/model/hubSlice"
 
-function AuthGuard({ children }: { children: ReactElement }) {
-  const dispatch = useAppDispatch()
+function AuthGuard({ children }: { children: ReactNode }) {
   const isAuth = useAppSelector(SessionSelectors.isAuth)
 
-  if (!isAuth) {
-    dispatch(setReason({ reason: "authorization" }))
-    return <Navigate to={"/hub"} />
-  }
-
+  if (!isAuth) return <Navigate to={"/hub/authorization"} />
   return children
 }
 
-function RedirectToHome({ children }: { children: ReactElement }) {
+function RedirectToHome({ children }: { children: ReactNode }) {
   const isAuth = useAppSelector(SessionSelectors.isAuth)
 
   if (isAuth) return <Navigate to={"/"} />
@@ -47,6 +43,10 @@ export function appRouter() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/hub?/:reason",
+          element: <Hub />,
         },
         {
           path: "new-todo",
@@ -71,7 +71,7 @@ export function appRouter() {
           ],
         },
         {
-          path: "todos",
+          path: "/todos",
           element: (
             <AuthGuard>
               <AllTodos />
