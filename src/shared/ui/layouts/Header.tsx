@@ -1,8 +1,8 @@
+import { useSession } from "entities/session/model/sessionSelectors.ts"
+import { logOut } from "entities/user"
 import { FcAbout } from "react-icons/fc"
 import { Link } from "react-router-dom"
-import { useSession } from "entities/session/model/sessionSelectors.ts"
 import { useAppDispatch } from "shared/lib/ReduxHooks.ts"
-import { logOut } from "entities/user"
 
 export function Header() {
   const { isAuth } = useSession()
@@ -12,7 +12,7 @@ export function Header() {
   return (
     <header className={"flex items-center justify-between text-lg p-2"}>
       <div className={"flex gap-1"}>
-        <Link to={"/home"}>
+        <Link to={"/"}>
           <FcAbout className={"cursor-pointer text-4xl"} />
         </Link>
         <Link to={"/new-todo"}>New Todo</Link>

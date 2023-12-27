@@ -1,5 +1,5 @@
+import { CreateTodoSelectors, sendTodo } from "features/create-todo/model/createTodoSlice"
 import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
-import { CreateTodoSelectors, sendTodo } from "features/create-todo/createTodoSlice.ts"
 import { Button } from "shared/ui/common/Button.tsx"
 
 export function TodoPreview() {

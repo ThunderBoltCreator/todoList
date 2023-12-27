@@ -39,6 +39,10 @@ export default {
       backgroundColor: {
         loader: "rgba(255,255,255, 0.9)",
       },
+      backgroundImage: {
+        "btn-create-todo": "url('/src/shared/images/create_todo.png')",
+        "btn-todos-list": "url('/src/shared/images/todos_list.png')",
+      },
     },
   },
   plugins: [

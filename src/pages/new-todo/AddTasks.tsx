@@ -1,10 +1,10 @@
-import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
-import { useFieldArray, useForm } from "react-hook-form"
-import { CreateTaskInputBlock } from "./CreateTaskInputBlock.tsx"
-import { CreateTodoActions, CreateTodoSelectors } from "features/create-todo/createTodoSlice.ts"
-import { useNavigate } from "react-router-dom"
+import { CreateTodoActions, CreateTodoSelectors } from "features/create-todo/model/createTodoSlice.ts"
 import { CreateTodoBaseForm } from "features/create-todo/ui/CreateTodoBaseForm.tsx"
+import { useFieldArray, useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { Button } from "shared/ui/common/Button.tsx"
+import { CreateTaskInputBlock } from "./CreateTaskInputBlock.tsx"
 
 export interface FormState {
   blocks: FormBlock[]

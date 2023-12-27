@@ -1,11 +1,11 @@
-import { useForm } from "react-hook-form"
-import { useAppDispatch } from "shared/lib/ReduxHooks.ts"
-import { useNavigate } from "react-router-dom"
-import { CreateTodoActions } from "features/create-todo/createTodoSlice.ts"
-import { object, string } from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { Button } from "shared/ui/common/Button.tsx"
+import { CreateTodoActions } from "features/create-todo/model/createTodoSlice"
 import { CreateTodoBaseForm } from "features/create-todo/ui/CreateTodoBaseForm.tsx"
+import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
+import { useAppDispatch } from "shared/lib/ReduxHooks.ts"
+import { Button } from "shared/ui/common/Button.tsx"
+import { object, string } from "yup"
 
 export function CreateTodoForm() {
   const dispatch = useAppDispatch()
