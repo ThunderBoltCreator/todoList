@@ -4,7 +4,6 @@ import { tasksSlice } from "entities/task"
 import { todoListsSlice } from "entities/todoLists"
 import { userSlice } from "entities/user"
 import { createTodoSlice } from "features/create-todo"
-import { hubSlice } from "pages/hub"
 
 const rootReducer = {
   session: sessionSlice.reducer,
@@ -12,7 +11,6 @@ const rootReducer = {
   tasks: tasksSlice.reducer,
   todoLists: todoListsSlice.reducer,
   createTodo: createTodoSlice.reducer,
-  hub: hubSlice.reducer,
 }
 
 export const store = configureStore({

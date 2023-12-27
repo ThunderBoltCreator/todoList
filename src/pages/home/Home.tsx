@@ -1,15 +1,19 @@
 import cn from "classnames"
+import { SessionSelectors } from "entities/session"
 import { fetchTodos } from "entities/todoLists"
 import { authMe } from "entities/user"
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { useAppDispatch } from "shared/lib/ReduxHooks.ts"
+import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
 
 export function Home() {
   const dispatch = useAppDispatch()
+  const isAuth = useAppSelector(SessionSelectors.isAuth)
   useEffect(() => {
     dispatch(authMe())
-    dispatch(fetchTodos())
+    if (isAuth) {
+      dispatch(fetchTodos())
+    }
   }, [])
 
   const styles = {
