@@ -2,7 +2,6 @@ import { baseLayout } from "app/layouts/baseLayout.tsx"
 import { SessionSelectors } from "entities/session"
 import { AllTodos } from "pages/all-todos/AllTodos"
 import { Home } from "pages/home/Home"
-import { setReason } from "pages/hub/model/hubSlice"
 import { AddTasks } from "pages/new-todo/AddTasks.tsx"
 import { CreateTodo } from "pages/new-todo/CreateTodo.tsx"
 import { CreateTodoForm } from "pages/new-todo/CreateTodoForm.tsx"
@@ -13,6 +12,7 @@ import type { ReactElement } from "react"
 import { Navigate, createBrowserRouter } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { layoutWithTabs } from "./layouts/layoutWithTabs"
+import { setReason } from "pages/hub/model/hubSlice"
 
 function AuthGuard({ children }: { children: ReactElement }) {
   const dispatch = useAppDispatch()

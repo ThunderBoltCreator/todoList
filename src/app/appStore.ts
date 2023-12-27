@@ -7,12 +7,12 @@ import { createTodoSlice } from "features/create-todo"
 import { hubSlice } from "pages/hub"
 
 const rootReducer = {
+  hub: hubSlice.reducer,
   session: sessionSlice.reducer,
   user: userSlice.reducer,
   tasks: tasksSlice.reducer,
   todoLists: todoListsSlice.reducer,
   createTodo: createTodoSlice.reducer,
-  hub: hubSlice.reducer,
 }
 
 export const store = configureStore({
