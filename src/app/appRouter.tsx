@@ -9,11 +9,10 @@ import { CreateTodoForm } from "pages/new-todo/CreateTodoForm.tsx"
 import { TodoPreview } from "pages/new-todo/TodoPreview.tsx"
 import { SignIn } from "pages/sign-in"
 import { SingleTodoList } from "pages/single-todolist/SingleTodoList.tsx"
-import type { ReactNode } from "react"
+import { type ReactNode } from "react"
 import { Navigate, createBrowserRouter } from "react-router-dom"
 import { useAppSelector } from "shared/lib/ReduxHooks.ts"
 import { layoutWithTabs } from "./layouts/layoutWithTabs"
-import { setReason } from "pages/hub/model/hubSlice"
 
 function AuthGuard({ children }: { children: ReactNode }) {
   const isAuth = useAppSelector(SessionSelectors.isAuth)

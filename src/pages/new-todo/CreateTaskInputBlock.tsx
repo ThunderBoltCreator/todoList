@@ -17,7 +17,7 @@ export function CreateTaskInputBlock({ remove, control, index, className }: Prop
       <Controller
         name={`blocks.${index}.taskTitle`}
         control={control}
-        render={({ field }) => <input {...field} placeholder={"Enter Task Title"} />}
+        render={({ field }) => <input {...field} autoFocus placeholder={"Enter Task Title"} />}
       />
       <Controller
         name={`blocks.${index}.completed`}

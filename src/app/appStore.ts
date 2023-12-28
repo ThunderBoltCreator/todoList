@@ -6,7 +6,6 @@ import { userSlice } from "entities/user"
 import { createTodoSlice } from "features/create-todo"
 
 const rootReducer = {
-  hub: hubSlice.reducer,
   session: sessionSlice.reducer,
   user: userSlice.reducer,
   tasks: tasksSlice.reducer,

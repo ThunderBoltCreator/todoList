@@ -9,11 +9,10 @@ import { useAppDispatch, useAppSelector } from "shared/lib/ReduxHooks.ts"
 export function Home() {
   const dispatch = useAppDispatch()
   const isAuth = useAppSelector(SessionSelectors.isAuth)
+
   useEffect(() => {
     dispatch(authMe())
-    if (isAuth) {
-      dispatch(fetchTodos())
-    }
+    dispatch(fetchTodos())
   }, [])
 
   const styles = {

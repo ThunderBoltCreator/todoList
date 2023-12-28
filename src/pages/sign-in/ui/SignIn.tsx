@@ -6,9 +6,11 @@ export function SignIn() {
   // })
 
   return (
-    <div>
-      <h1>Sign In</h1>
-      <AuthForm />
+    <div className="h-full flex flex-col items-center justify-center">
+      <div>
+        <h1>Sign In</h1>
+        <AuthForm />
+      </div>
     </div>
   )
 }
