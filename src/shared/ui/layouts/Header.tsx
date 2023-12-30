@@ -22,7 +22,7 @@ export function Header() {
           Logout
         </Link>
       ) : (
-        <Link to={"/auth/sign-in"}>SignIn</Link>
+        <Link to={"/auth/sign-in"}>Sign In</Link>
       )}
     </header>
   )

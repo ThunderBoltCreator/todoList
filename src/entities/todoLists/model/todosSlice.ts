@@ -3,7 +3,6 @@ import type { TodoListModel, TodoListsState } from "./types.ts"
 import { todoListApi } from "entities/todoLists/api/todoListApi.ts"
 import type { AxiosError } from "axios"
 import { fetchTasks } from "entities/task"
-// import {setStatus} from 'entities/session'
 
 const initialState: TodoListsState = {
   items: [],

@@ -18,21 +18,21 @@ const initialState: SessionSliceState = {
   bigStatus: "loading",
   error: null,
   isAuthorized: false,
+  redirectedPath: "/",
 }
 
 export const sessionSlice = createSlice({
   name: "session",
   initialState,
   reducers: {
-    // setAuth(state, action: PayloadAction<{ isAuthorized: boolean }>) {
-    //   state.isAuthorized = action.payload.isAuthorized
-    // },
     setError(state, action: PayloadAction<string | null>) {
-      state.error = action.payload
+      if (!action.payload?.includes("hub")) {
+        state.error = action.payload
+      }
     },
-    // setStatus(state, action: PayloadAction<{ status: SessionStatus }>) {
-    //   state.status = action.payload.status
-    // },
+    setRedirectedPath(state, action: PayloadAction<string>) {
+      state.redirectedPath = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder
