@@ -1,4 +1,4 @@
-import { appRouter } from "app/appRouter.tsx"
+import { appRouter } from "app/appRouter"
 import { store } from "app/appStore.ts"
 import React from "react"
 import ReactDOM from "react-dom/client"

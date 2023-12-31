@@ -1,5 +1,6 @@
 import { baseLayout } from "app/layouts/baseLayout.tsx"
 import { SessionSelectors } from "entities/session"
+import { userApi } from "entities/user"
 import { AllTodos } from "pages/all-todos/AllTodos"
 import { Home } from "pages/home/Home"
 import { Hub } from "pages/hub/Hub"
@@ -54,6 +55,9 @@ export function appRouter() {
               <CreateTodo />
             </AuthGuard>
           ),
+          loader: async () => {
+            return userApi.authMe()
+          },
           children: [
             {
               path: "title",
